@@ -13,8 +13,9 @@ function App() {
       const response = await fetch('https://carambar-blagues-api-u6ws.onrender.com/api/v1/blagues/random')
       if (!response.ok) throw new Error(`Erreur: ${response.status}`)
       setBlague(await response.json())
-    } catch (err) {
+    } catch (error) {
       setError('Impossible de récupérer une blague. Veuillez réessayer.')
+      console.error('Erreur API:', error)
     } finally {
       setLoading(false)
     }
@@ -25,7 +26,7 @@ function App() {
       <div className="max-w-4xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden">
         
         <div className="bg-gradient-to-r from-red-600 to-red-800 text-white p-8 text-center">
-          <h1 className="text-5xl font-bold mb-4">🍬 Carambar Blagues 🍬</h1>
+          <h1 className="text-5xl font-bold mb-4">🍬 Blagues Carambar 🍬</h1>
           <p className="text-xl opacity-90">
             Découvrez les meilleures blagues de la célèbre confiserie française !
           </p>
@@ -66,9 +67,16 @@ function App() {
                   <h3 className="text-2xl font-bold text-red-600 mb-4 flex items-center gap-2">
                     😄 Réponse :
                   </h3>
-                  <p className="text-lg text-gray-800 bg-white p-4 rounded-lg border-l-4 border-yellow-400">
-                    {blague.reponse}
-                  </p>
+                  <div className="group relative">
+                    <p className="text-lg text-gray-800 bg-white p-4 rounded-lg border-l-4 border-yellow-400 transition-all duration-300 filter blur-sm group-hover:blur-none select-none group-hover:select-text">
+                      {blague.reponse}
+                    </p>
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
+                      <span className="bg-red-500 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg">
+                        🎭 Survolez pour révéler la réponse !
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
