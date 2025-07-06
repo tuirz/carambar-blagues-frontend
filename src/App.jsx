@@ -10,7 +10,7 @@ function App() {
     setError(null)
     
     try {
-      const response = await fetch('https://carambar-blagues-api.onrender.com/api/v1/blagues/random')
+      const response = await fetch('https://carambar-blagues-api-u6ws.onrender.com/api/v1/blagues/random')
       if (!response.ok) throw new Error(`Erreur: ${response.status}`)
       setBlague(await response.json())
     } catch (err) {
@@ -89,7 +89,7 @@ function App() {
           <p className="text-gray-600">
             API Backend : 
             <a 
-              href="https://carambar-blagues-api.onrender.com/api-docs" 
+              href="https://carambar-blagues-api-u6ws.onrender.com/api-docs" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-red-600 hover:text-orange-500 ml-2 font-medium hover:underline transition-colors"
